@@ -1,8 +1,8 @@
-#digitron{
+#display{
     -fx-background-color: #66d60f;
      -fx-padding: 5px;
 }
 
-#jednako{
+#equalsBtn{
     -fx-background-color: #ee87a9;
 }
