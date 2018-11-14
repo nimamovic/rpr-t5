@@ -5,72 +5,139 @@ import javafx.event.ActionEvent;
 
 public class Controller {
 
-    private SimpleStringProperty prikaz;
-    private SimpleStringProperty unos1 = new SimpleStringProperty("");;
-    private SimpleStringProperty operacija = new SimpleStringProperty("=");;
+    private enum Operator {ADD, SUB, MUL, DIV, MOD, EQU};
+    private SimpleStringProperty number;
+    private Operator operator = Operator.EQU;
+    private double result = 0;
+    private boolean oClear = false;
 
     public Controller() {
-        prikaz = new SimpleStringProperty("");
+        number = new SimpleStringProperty();
+        number.set("0");
     }
 
-    public String getUnos() {
-        return prikaz.get();
+    public SimpleStringProperty numberProperty() {
+        return number;
     }
 
-    public void setUnos(String u) {
-        this.prikaz.set(u);
+    public String getNumber() {
+        return number.get();
     }
 
-    public void za0(ActionEvent event) {
-        setUnos("0");
+    private void buildNumber(String num) {
+        if(oClear) {
+            numberProperty().setValue("");
+            oClear = false;
+        }
+
+        if((getNumber().equals("0") && !num.equals("."))) {
+            numberProperty().setValue("");
+        }
+
+        numberProperty().setValue(getNumber().concat(num));
     }
 
-    public void za1(ActionEvent event) {
-        setUnos(prikaz.get() + "1");
+    private double parseNumber(String num) {
+        return Double.parseDouble(num);
     }
 
-    public void za2(ActionEvent event) {
-        setUnos(prikaz.get() + "2");
+    private void operate(Operator o) {
+        double operand = parseNumber(getNumber());
+
+        switch (operator) {
+            case EQU:
+                result = operand;
+                break;
+            case ADD:
+                result += operand;
+                break;
+            case SUB:
+                result -= operand;
+                break;
+            case MUL:
+                result*= operand;
+                break;
+            case DIV:
+                //Err
+                result /= operand;
+                break;
+            case MOD:
+                //Err
+                result %= operand;
+                break;
+        }
+
+        numberProperty().setValue("" + result);
+        oClear = true;
+        operator = o;
     }
 
-    public void za3(ActionEvent event) {
-        setUnos(prikaz.get() + "3");
+    public void za0(ActionEvent actionEvent) {
+        buildNumber("0");
     }
 
-    public void za4(ActionEvent event) {
-        setUnos(prikaz.get() + "4");
+    public void za1(ActionEvent actionEvent) {
+        buildNumber("1");
     }
 
-    public void za5(ActionEvent event) {
-        setUnos(prikaz.get() + "5");
+    public void za2(ActionEvent actionEvent) {
+        buildNumber("2");
     }
 
-    public void za6(ActionEvent event) {
-        setUnos(prikaz.get() + "6");
+    public void za3(ActionEvent actionEvent) {
+        buildNumber("3");
     }
 
-    public void za7(ActionEvent event) {
-        setUnos(prikaz.get() + "7");
+    public void za4(ActionEvent actionEvent) {
+        buildNumber("4");
     }
 
-    public void za8(ActionEvent event) {
-        setUnos(prikaz.get() + "8");
+    public void za5(ActionEvent actionEvent) {
+        buildNumber("5");
     }
 
-    public void za9(ActionEvent event) {
-        setUnos(prikaz.get() + "9");
+    public void za6(ActionEvent actionEvent) {
+        buildNumber("6");
     }
 
-    public void zaMinus(ActionEvent event){
-        unos1.set(prikaz.get());
-        prikaz.set("");
-        operacija.set("-");
+    public void za7(ActionEvent actionEvent) {
+        buildNumber("7");
     }
 
-    public void zaPlus(ActionEvent event){
-        unos1.set(prikaz.get());
-        prikaz.set("");
-        operacija.set("+");
+    public void za8(ActionEvent actionEvent) {
+        buildNumber("8");
+    }
+
+    public void za9(ActionEvent actionEvent) {
+        buildNumber("9");
+    }
+
+    public void zaTacku(ActionEvent actionEvent) {
+        buildNumber(".");
+    }
+
+    public void zaPlus(ActionEvent actionEvent) {
+        operate(Operator.ADD);
+    }
+
+    public void zaMinus(ActionEvent actionEvent) {
+        operate(Operator.SUB);
+    }
+
+    public void zaMnozenje(ActionEvent actionEvent) {
+        operate(Operator.MUL);
+    }
+
+    public void zaDijeljenje(ActionEvent actionEvent) {
+        operate(Operator.DIV);
+    }
+
+    public void zaModul(ActionEvent actionEvent) {
+        operate(Operator.MOD);
+    }
+
+    public void zaJednako(ActionEvent actionEvent) {
+        operate(Operator.EQU);
     }
 
 }
