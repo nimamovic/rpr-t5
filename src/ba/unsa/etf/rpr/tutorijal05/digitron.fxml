@@ -30,7 +30,7 @@
         <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
     </rowConstraints>
     <children>
-        <Button fx:id="procenat" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="\%" GridPane.rowIndex="1">
+        <Button fx:id="procenat" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="0.0" prefWidth="43.0" text="\%" GridPane.rowIndex="1">
             <font>
                 <Font size="20.0" />
             </font></Button>
