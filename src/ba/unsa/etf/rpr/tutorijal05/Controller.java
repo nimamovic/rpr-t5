@@ -86,9 +86,7 @@ public class Controller {
         buildNumber("3");
     }
 
-    public void za4(ActionEvent actionEvent) {
-        buildNumber("4");
-    }
+    public void za4(ActionEvent actionEvent) { buildNumber("4"); }
 
     public void za5(ActionEvent actionEvent) {
         buildNumber("5");
@@ -111,7 +109,7 @@ public class Controller {
     }
 
     public void zaTacku(ActionEvent actionEvent) {
-        buildNumber(".");
+        if(!numberProperty().get().contains(".")) buildNumber(".");
     }
 
     public void zaPlus(ActionEvent actionEvent) {

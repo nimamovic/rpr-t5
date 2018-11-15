@@ -174,7 +174,6 @@ class MainTest {
         robot.clickOn("#equalsBtn");
         assertEquals("Infinity", display.getText());
     }
-/*
     @Test
     public void dotBtn2 (FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
@@ -184,8 +183,9 @@ class MainTest {
         robot.clickOn("#dotBtn");
         robot.clickOn("#dotBtn");
         robot.clickOn("#dotBtn");
-        assertEquals("0", display.getText());
+        assertEquals("0.", display.getText());
     }
+    /*
     @Test
     public void plusBtn (FxRobot robot) {
         display = robot.lookup("#display").queryAs(Label.class);
