@@ -10,6 +10,7 @@ public class Controller {
     private Operator operator = Operator.EQU;
     private double result = 0;
     private boolean oClear = false;
+    private boolean temp = false;
 
     public Controller() {
         number = new SimpleStringProperty();
@@ -32,8 +33,9 @@ public class Controller {
 
         if((getNumber().equals("0") && !num.equals("."))) {
             numberProperty().setValue("");
-        }
 
+        }
+        temp=true;
         numberProperty().setValue(getNumber().concat(num));
     }
 
@@ -43,28 +45,40 @@ public class Controller {
 
     private void operate(Operator o) {
         double operand = parseNumber(getNumber());
-
-        switch (operator) {
-            case EQU:
-                result = operand;
-                break;
-            case ADD:
-                result += operand;
-                break;
-            case SUB:
-                result -= operand;
-                break;
-            case MUL:
-                result*= operand;
-                break;
-            case DIV:
-                result /= operand;
-                break;
-            case MOD:
-                result %= operand;
-                break;
+        if(temp) {
+            switch (operator) {
+                case EQU: {
+                    result = operand;
+                    temp = false;
+                    break;
+                }
+                case ADD: {
+                    result += operand;
+                    temp = false;
+                    break;
+                }
+                case SUB: {
+                    result -= operand;
+                    temp = false;
+                    break;
+                }
+                case MUL: {
+                    result *= operand;
+                    temp = false;
+                    break;
+                }
+                case DIV: {
+                    result /= operand;
+                    temp = false;
+                    break;
+                }
+                case MOD: {
+                    result %= operand;
+                    temp = false;
+                    break;
+                }
+            }
         }
-
         numberProperty().setValue("" + result);
         oClear = true;
         operator = o;
@@ -113,6 +127,7 @@ public class Controller {
     }
 
     public void zaPlus(ActionEvent actionEvent) {
+
         operate(Operator.ADD);
     }
 
